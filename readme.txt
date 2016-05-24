@@ -6,11 +6,11 @@ Tested up to: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds debugging info for media to the debug bar.
+Adds media debugging information to the Debug Bar.
 
 == Description ==
 
-This plugin adds helpful media debugging information to the debug bar.
+This plugin adds a Media panel to the Debug Bar. Requires the [Debug Bar plugin](https://wordpress.org/plugins/debug-bar/).
 
 
 == Changelog ==

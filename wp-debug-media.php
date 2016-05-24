@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Debug Media
  * Version: 0.1.0
- * Description: Output helpful debugging information related to your media settings.
+ * Description: Adds media debugging information to the Debug Bar.
  * Author: Joe McGill
  * Author URI: joemcgill.net
  * Plugin URI: https://github.com/joemcgill/debug-media

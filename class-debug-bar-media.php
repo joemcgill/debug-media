@@ -2,13 +2,40 @@
 
 class Debug_Bar_Media extends Debug_Bar_Panel {
 
-	private $editor;
+	/**
+	 * The current active `WP_Image_Edtor`
+	 *
+	 * @since  0.1.0
+	 * @access private
+	 * @var    string
+	 */
+	private $editor = '';
 
-	private $imagick_version;
+	/**
+	 * Imagick version info.
+	 *
+	 * @since  0.1.0
+	 * @access private
+	 * @var    array|string
+	 */
+	private $imagick_version = '';
 
-	private $gd_version;
+	/**
+	 * GD version info.
+	 *
+	 * @since  0.1.0
+	 * @access private
+	 * @var    string
+	 */
+	private $gd_version = '';
 
-	function init() {
+	/**
+	 * Initialize the data for the Media debug panel.
+	 *
+	 * @since  0.1.0
+	 * @access public
+	 */
+	public function init() {
 		$this->title( 'Media' );
 
 		// Preload the data.
@@ -17,7 +44,13 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 		$this->get_gd_version();
 	}
 
-	function render() {
+	/**
+	 * Output the content of the Media debug panel.
+	 *
+	 * @since  0.1.0
+	 * @access public
+	 */
+	public function render() {
 	?>
 	<h1>Media Debugging Info</h1>
 	<table class="form-table">
@@ -63,14 +96,28 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 	<?php
 	}
 
-	function get_current_editor() {
+	/**
+	 * Return the name of the active `WP_Image_Edtor`.
+	 *
+	 * @since  0.1.0
+	 * @access private
+	 * @return string The active image editor class name (`WP_Image_Editor_Imagick` or `WP_Image_Edtor_GD`).
+	 */
+	private function get_current_editor() {
 		if ( ! $this->editor ) {
 			$this->editor = _wp_image_editor_choose();
 		}
 		return $this->editor;
 	}
 
-	function get_imagick_version() {
+	/**
+	 * Return version information for Imagick if installed.
+	 *
+	 * @since  0.1.0
+	 * @access private
+	 * @return array|string An array containing `Imagick::getVersion()` info or 'Imagick not available'.
+	 */
+	private function get_imagick_version() {
 		// Make sure the current editor has been set.
 		if ( ! $this->editor ) {
 			$this->get_current_editor();
@@ -89,7 +136,14 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 		return $this->imagick_version;
 	}
 
-	function get_gd_version() {
+	/**
+	 * Return the current version of GD installed.
+	 *
+	 * @since  0.1.0
+	 * @access private
+	 * @return string The current GD version or 'GD not available'.
+	 */
+	private function get_gd_version() {
 		// Make sure the current editor has been set.
 		if ( ! $this->editor ) {
 			$this->get_current_editor();

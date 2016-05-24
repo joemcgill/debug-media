@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Main class used to implement the Media Debug Bar panel.
+ *
+ * @since 0.1.0
+ */
 class Debug_Bar_Media extends Debug_Bar_Panel {
 
 	/**

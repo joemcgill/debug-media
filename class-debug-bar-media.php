@@ -4,10 +4,17 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 
 	private $editor;
 
-	private $editor_version;
+	private $imagick_version;
+
+	private $gd_version;
 
 	function init() {
 		$this->title( 'Media' );
+
+		// Preload the data.
+		$this->get_current_editor();
+		$this->get_imagick_version();
+		$this->get_gd_version();
 	}
 
 	function render() {
@@ -16,12 +23,20 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 	<table class="form-table">
 		<tbody>
 			<tr>
-				<th scope="row">Editor</th>
-				<td><?php echo $this->get_current_editor(); ?></td>
+				<th scope="row">Active Editor</th>
+				<td><?php echo $this->editor; ?></td>
 			</tr>
 			<tr>
-				<th scope="row">Editor Version</th>
-				<td><?php echo $this->get_editor_version(); ?></td>
+				<th scope="row">Imagick Module Number</th>
+				<td><?php echo ( is_array( $this->imagick_version ) ) ? $this->imagick_version['versionNumber'] : $this->imagick_version; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">ImageMagick Version</th>
+				<td><?php echo ( is_array( $this->imagick_version ) ) ? $this->imagick_version['versionString'] : $this->imagick_version; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">GD Version</th>
+				<td><?php echo $this->gd_version; ?></td>
 			</tr>
 			<tr>
 				<th scope="row">Memory Limit</th>
@@ -55,31 +70,37 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 		return $this->editor;
 	}
 
-	function get_editor_version() {
+	function get_imagick_version() {
 		// Make sure the current editor has been set.
 		if ( ! $this->editor ) {
 			$this->get_current_editor();
 		}
 
-		// Return early if we already know the editor version.
-		if ( $this->editor_version ) {
-			return $this->editor_version;
+		// Return early if we already know the Imagick version.
+		if ( ! $this->imagick_version ) {
+			if ( class_exists( 'Imagick' ) ) {
+				$imagick = new Imagick();
+				$this->imagick_version = $imagick->getVersion();
+			} else {
+				$this->imagick_version = 'Imagick not available';
+			}
 		}
 
-		if ( 'WP_Image_Editor_Imagick' === $this->editor ) {
-			$imagick = new Imagick();
-			$this->editor_version = implode( ', ', $imagick->getVersion() );
-		} elseif ( 'WP_Image_Editor_GD' === $this->editor ) {
-			$gd = gd_info();
-			$this->editor_version = $gd['GD Version'];
-		} else {
-			$this->editor_version = 'Not Available';
-		}
-
-		return $this->editor_version;
+		return $this->imagick_version;
 	}
 
-	function get_memory_limit() {
-		return ini_get( 'memory_limit' );
+	function get_gd_version() {
+		// Make sure the current editor has been set.
+		if ( ! $this->editor ) {
+			$this->get_current_editor();
+		}
+
+		// Return early if we already know the GD version.
+		if ( ! $this->gd_version ) {
+			$gd = gd_info();
+			$this->gd_version = is_array( $gd ) ? $gd['GD Version'] : 'GD not available';
+		}
+
+		return $this->gd_version;
 	}
 }

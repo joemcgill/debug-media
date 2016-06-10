@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Debug Media
- * Version: 0.1.0
+ * Version: 0.2.0
  * Description: Adds media debugging information to the Debug Bar.
  * Author: Joe McGill
  * Author URI: joemcgill.net

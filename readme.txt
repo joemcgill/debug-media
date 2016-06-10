@@ -15,5 +15,8 @@ This plugin adds a Media panel to the Debug Bar. Requires the [Debug Bar plugin]
 
 == Changelog ==
 
-= 0.1 =
-* Adds basic media debugging info to the debug bar
+= 0.2.0 =
+* Adds information about Imagick resource limits, when available.
+
+= 0.1.0 =
+* Adds basic media debugging info to the debug bar.

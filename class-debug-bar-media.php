@@ -43,6 +43,15 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 	private $gd_version = '';
 
 	/**
+	 * Ghostscript version info.
+	 *
+	 * @since  0.3.0
+	 * @access private
+	 * @var    string
+	 */
+	private $gs_version = '';
+
+	/**
 	 * Initialize the data for the Media debug panel.
 	 *
 	 * @since  0.1.0
@@ -55,6 +64,7 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 		$this->get_current_editor();
 		$this->get_imagick_version();
 		$this->get_gd_version();
+		$this->get_gs_version();
 	}
 
 	/**
@@ -83,6 +93,10 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 			<tr>
 				<th scope="row">GD Version</th>
 				<td><?php echo $this->gd_version; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Ghostscript Version</th>
+				<td><?php echo $this->gs_version; ?></td>
 			</tr>
 			<tr>
 				<th scope="row">Memory Limit</th>
@@ -188,6 +202,23 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 		}
 
 		return $this->gd_version;
+	}
+
+	/**
+	 * Return the current version of Ghostscript installed.
+	 *
+	 * @since  0.3.0
+	 * @access private
+	 * @return string The current Ghostscript version if available.
+	 */
+	private function get_gs_version() {
+		if ( ! $this->gs_version ) {
+			$gs = exec( 'gs --version' );
+
+			$this->gs_version = ( ! empty( $gs ) ) ? $gs : 'Not available';
+		}
+
+		return $this->gs_version;
 	}
 
 	/**

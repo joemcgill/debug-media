@@ -2,7 +2,7 @@
 **Contributors:** joemcgill  
 **Tags:** media, debugging  
 **Requires at least:** 4.0.0  
-**Tested up to:** 4.5.2  
+**Tested up to:** 4.7.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -14,6 +14,9 @@ This plugin adds a Media panel to the Debug Bar. Requires the [Debug Bar plugin]
 
 
 ## Changelog ##
+
+### 0.3.0 ###
+* Adds Ghostscript version information.
 
 ### 0.2.0 ###
 * Adds information about Imagick resource limits, when available.

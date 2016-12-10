@@ -197,7 +197,7 @@ class Debug_Bar_Media extends Debug_Bar_Panel {
 
 		// Return early if we already know the GD version.
 		if ( ! $this->gd_version ) {
-			$gd = gd_info();
+			$gd = ( is_callable( 'gd_info' ) ) ? gd_info() : false;
 			$this->gd_version = is_array( $gd ) ? $gd['GD Version'] : 'GD not available';
 		}
 
